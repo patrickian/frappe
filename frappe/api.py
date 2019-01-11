@@ -10,7 +10,7 @@ from frappe.utils.response import build_response
 from frappe import _
 from six.moves.urllib.parse import urlparse, urlencode
 import base64
-
+from pick.api import PickAPIHandler
 
 def handle():
 	"""
@@ -124,7 +124,8 @@ def handle():
 					frappe.db.commit()
 			else:
 				raise frappe.DoesNotExistError
-
+	elif call == 'v1':
+		PickAPIHandler(frappe.local.request)
 	else:
 		raise frappe.DoesNotExistError
 
